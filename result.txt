@@ -1,0 +1,192 @@
+                                            TASK 1  
+#include <stdio.h>
+#include <string.h>
+//--------------------------------------------------------------------------------
+///
+/// This functions decrypts the text within the cipher_text variable directly.
+///
+/// @param cipher_text The cipher text
+/// @param offset The amount each letter is shifted
+///
+/// @return Nothing - decrpyted text is in the cipher_text variable.
+//
+char *decipher(char cipher_text[], int offset)
+{
+    for (int j = 0; cipher_text[j] != '\0'; j++) 
+    {
+        char original_char = cipher_text[j];
+
+        //getting the ascii value of our character
+        int char_value = original_char;
+
+        //updating the value with an offset:
+        char_value += offset;
+        while(char_value > 127)//if the character will be off range;
+        {
+            char_value -= 127;
+        }
+        
+        char original_char_off = char_value;
+        //check if the character is in our range:        
+        cipher_text[j] = original_char_off;
+    }
+    return cipher_text;
+}
+int main() 
+{
+    char cipher_text[] = "Gsqixs$DFehyhy5$sr$]syXyfi0$epp}sy{lsevi{iev}erhfyvhirih0$erhM{mppkmzi}sy$IWT$Qiqiw2$1Qexxli{$55>6<";
+    //so there are 127 possible shifts, we must use our deciphering offset at most 127 times;
+    int offset = 0;
+    char *pointer;
+    for(int i = 0; i < 127 ; i++)//we can adjust the value of i to get to the desired text
+    {
+        ++offset;//we can iterate because if the offset was 0, then it would be a plaintext.
+        printf("\n%d\n", offset);
+        pointer = decipher(cipher_text, offset);
+       
+        puts(pointer);
+        
+        
+    }
+     // Assuming the offset used for encryption
+       //the passing offset is 113;
+    // Decipher the text
+        char str[] = "#OMETO \"ADUDU◄ON9OU4UBEALLYOUWHOAREWEARYANDBURDENED-ATTHEW◄◄→↕↑YOU\%30-EMES";
+        //had to put the escape characters for " and %;
+        puts(str);
+    // Display the deciphered text
+    // printf("Deciphered text: %s\n", pointer);
+
+    return 0;
+}
+//--------------------------------------------------------------------------------
+///
+/// Main function header - start of the program
+///
+/// @return - Returnvalue to the OS
+//
+
+                                           
+                                           
+                                           
+                                           
+                                            TASK2
+#include <stdio.h>
+//--------------------------------------------------------------------------------
+///
+/// This functions checks whether the given number is a prime.
+///
+/// @param number Number which should be checked for being a prime
+///
+/// @return If number is a prime, it returns the number itself
+/// otherwise 0 is returned
+//
+int isNumberPrime(unsigned long long number)
+{
+ // TODO
+// we don't need to check whether the number is positive, but we need to check whether it equal/bigger than 1:
+if(number >= 1){
+    //the number is prime if it is only divisible by itself or by 1:
+    for(int i = 2; i < number - 1;i++)
+    {
+        if(number % i == 0)//if the remainder of the division on some number that is smaller than that is 
+        //zero, then the number can be divided by our i and so the number is not prime.
+        {
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+}else{
+    printf("Invalid number");
+}
+
+ return 0;
+}
+//--------------------------------------------------------------------------------
+///
+/// Main function header - start of the program
+///
+/// @return - Returnvalue to the OS
+//
+int main()
+{
+ unsigned long long number = 13751701123; // you may adapt this in order to try different numbers
+ if(isNumberPrime(number))
+ {
+ printf("Number was a prime!\n");
+ }
+ else
+ {
+ printf("Number was not a prime!\n");
+ }
+ return 0;
+}/*                         TASK 2C 
+a. 7
+b. 3084467
+c. 6595718477
+d. 13751701123
+time needed:
+a: 0sec, b: 0sec, c: 0.1sec, d: 0.1sec (I have a powerful laptop);
+
+                            TASK 2D
+a) 3 = 1*3
+b)10 = 5*2;
+c)21 = 3*7;
+d)99 = 11*9 = 11*3*3; 
+*/
+                                    TASK 2 BONUS
+#include <stdio.h>
+#define AMOUNT_FACTORS 100 // you may adapt this in order if you need more space for
+// prime factors (but I dont think so ;))
+//--------------------------------------------------------------------------------
+///
+/// This functions determines the prime factorization of a given number.
+///
+/// @param number The number on which the prime factorization should be performed
+/// @param factors An Array where the primefactores should be stored
+///
+/// @return Nothing - decrpyted text is in the cipher_text variable.
+//
+void createPrimeFactors(unsigned long number, unsigned long factors[AMOUNT_FACTORS])
+{
+ //our number is positive
+ //we would need to decompose each number:
+ //we move through each element of our number
+int count = 0;
+long long int i = 2;
+while(i <= number)
+{
+
+    if(number % i == 0)//if the remainder of the division by our number is zero =our number is divisible by i;
+    {   
+
+        factors[count] = i;
+        count++;//to assign our factor to each consecutive element of factors.
+        number /= i;//decrease our number by that factor;
+        i = 2; //because if the number can be divided by two two times
+        //the first time it will be divided, the second it will not, because i will be already increased;
+    }
+    i++;
+}
+  
+ 
+}
+//--------------------------------------------------------------------------------
+///
+/// Main function header - start of the program
+///
+/// @return - Returnvalue to the OS
+//
+int main()
+{
+ unsigned long factors[AMOUNT_FACTORS] = {0};
+ unsigned long number = 21; // you may adapt this to try out different numbers
+ createPrimeFactors(number, factors);
+ printf("The factors are:\n");
+ for(int index = 0; index < AMOUNT_FACTORS && factors[index]; index++)
+ {
+ printf("%lu ", factors[index]);
+ }
+ return 0;
+}

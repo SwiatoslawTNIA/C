@@ -11,47 +11,43 @@
 //
 char *decipher(char cipher_text[], int offset)
 {
-    for (int i = 0; cipher_text[i] != '\0'; i++) 
+    for (int j = 0; cipher_text[j] != '\0'; j++) 
     {
         char original_char = cipher_text[i];
-        printf("The original char is: %c", original_char);
         //getting the ascii value of our character
         int char_value = original_char;
-        printf("The original char is: %d", char_value);
-        
         //updating the value with an offset:
         char_value += offset;
-        while(char_value > 127)
+        while(char_value > 127)//if the character will be off range;
         {
             char_value -= 127;
         }
         
         char original_char_off = char_value;
         //check if the character is in our range:        
-        cipher_text[i] = original_char_off;
+        cipher_text[j] = original_char_off;
     }
     return cipher_text;
 }
-int main() {
+int main() 
+{
     char cipher_text[] = "Gsqixs$DFehyhy5$sr$]syXyfi0$epp}sy{lsevi{iev}erhfyvhirih0$erhM{mppkmzi}sy$IWT$Qiqiw2$1Qexxli{$55>6<";
     //so there are 127 possible shifts, we must use our deciphering offset at most 127 times;
-    int offset = 113;
+    int offset = 108;
     char *pointer;
-    for(int i = 0; i < 10 ; i++){
-        printf("\n%d\n", offset);
+    for(int i = 0; i < 127 ; i++){
+        
         pointer = decipher(cipher_text, offset);
-        printf("\n%d\n", offset);
+       
         puts(pointer);
-        offset++;
+        
         
     }
      // Assuming the offset used for encryption
-        //the offsets 13 and 113 pass very good.But still not the whole part is deciphered. we can use it again.
-        //that are not good:
-    
+       //the passing offset is 113;
     // Decipher the text
-    
-
+        char str[] = "#OMETO \"ADUDU◄ON9OU4UBEALLYOUWHOAREWEARYANDBURDENED-ATTHEW◄◄→↕↑YOU\%30-EMES";
+        puts(str);
     // Display the deciphered text
     // printf("Deciphered text: %s\n", pointer);
 
@@ -63,12 +59,3 @@ int main() {
 ///
 /// @return - Returnvalue to the OS
 //
-// int main()
-// {
-//  char cipher_text[] =
-//  "Gsqixs$DFehyhy5$sr$]syXyfi0$epp}sy{lsevi{iev}erhfyvhirih0$erhM{mppkmzi}sy$IWT$Qiqiw2$1Qexxli{$55>6<";
-//  int offset = 0; //adapt it to your solution
-//  decryptTextCaesar(cipher_text, offset);
-//  printf("%s\n", cipher_text);
-//  return 0;
-// }
