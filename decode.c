@@ -14,8 +14,11 @@ char *decipher(char cipher_text[], int offset)
     for (int i = 0; cipher_text[i] != '\0'; i++) 
     {
         char original_char = cipher_text[i];
+        printf("The original char is: %c", original_char);
         //getting the ascii value of our character
         int char_value = original_char;
+        printf("The original char is: %d", char_value);
+        
         //updating the value with an offset:
         char_value += offset;
         while(char_value > 127)
@@ -32,10 +35,10 @@ char *decipher(char cipher_text[], int offset)
 int main() {
     char cipher_text[] = "Gsqixs$DFehyhy5$sr$]syXyfi0$epp}sy{lsevi{iev}erhfyvhirih0$erhM{mppkmzi}sy$IWT$Qiqiw2$1Qexxli{$55>6<";
     //so there are 127 possible shifts, we must use our deciphering offset at most 127 times;
-    int offset = 108;
+    int offset = 113;
     char *pointer;
-    for(int i = 0; i < 20 ; i++){
-        
+    for(int i = 0; i < 10 ; i++){
+        printf("\n%d\n", offset);
         pointer = decipher(cipher_text, offset);
         printf("\n%d\n", offset);
         puts(pointer);
